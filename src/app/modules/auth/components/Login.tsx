@@ -1,12 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState} from 'react'
-import * as Yup from 'yup'
-import clsx from 'clsx'
-import {Link} from 'react-router-dom'
-import {useFormik} from 'formik'
-import {getUserByToken, login} from '../core/_requests'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
-import {useAuth} from '../core/Auth'
+import { useState } from 'react';
+import * as Yup from 'yup';
+import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { useAuth } from '../core/Auth';
+import { toAbsoluteUrl } from '../../../../_metronic/helpers';
+import {getUserByToken, login} from "../core/_requests";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -53,7 +52,12 @@ export function Login() {
         setLoading(false)
       }
     },
-  })
+  });
+
+  const handleGoogleLogin = () => {
+    // Redirect the user to the Google OAuth URL
+    window.location.href = 'http://localhost:3000/auth/google';
+  };
 
   return (
     <form
@@ -77,6 +81,7 @@ export function Login() {
           <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
+            onClick={handleGoogleLogin}
           >
             <img
               alt='Logo'
